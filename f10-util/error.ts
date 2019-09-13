@@ -23,7 +23,11 @@ export const errorHandler = (options: Options, _req: Request, res: Response
     status,
     extraParams,
   } = options;
-  console.error(err.stack || 'Unknown Error');
+  if (err === undefined) {
+    console.error(options);
+  } else {
+    console.error(err.stack || 'Unknown Error');
+  }
   let errorMsg: string;
 
   if (msg === undefined || msg === true) {

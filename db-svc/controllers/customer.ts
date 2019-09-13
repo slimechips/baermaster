@@ -2,7 +2,7 @@ import { Request, Response, NextFunction, Router } from 'express';
 import { cfg } from 'f10-util/configs';
 import { pool } from './init';
 import { MySQLResponse } from '../models/MySQLResponse';
-import { getGenericData, formatString } from './common';
+import { getGenericData, formatString, convArrToSQL, splitStrData } from './common';
 import { NewsDetails, NewsObj } from '../models/NewsDetails';
 import { CustData } from '../models/CustData';
 
@@ -13,17 +13,15 @@ export const postEditDetails = (req: Request, res: Response,
   let { customer } = req.params;
   customer = decodeURIComponent(customer);
   const details = req.body;
-  const cond = `(id = '${customer}')`;
 
-  _editCustomerData(details, cond).then(() => {
+  _editCustomerData(details, customer).then(() => {
     res.status(200).json({ success: true });
   }).catch((err: Error) => next({ err }));
 };
 
 export const getPassword = (req: Request, res: Response,
   next: NextFunction): void => {
-  const cond = `id = '${req.params.id}' LIMIT 1`;
-  _getCustData('password', cond).then((rs: CustData) => {
+  _getCustData('password', req.params.id).then((rs: CustData) => {
     const json: object = {
       id: req.params.id,
       password: rs.password,
@@ -35,14 +33,13 @@ export const getPassword = (req: Request, res: Response,
 export const getCustomerDetails = (req: Request, res: Response,
   next: NextFunction): void => {
   const customersStr: string = decodeURIComponent(req.params.customers);
-  const customers: Array<string> = _splitStrData(customersStr);
+  const customers: Array<string> = splitStrData(customersStr);
   const fieldsParam = '*';
 
   let allCustData: object = {};
   let iterationsLeft: number = customers.length;
   customers.forEach((customer: string) => {
-    const cond = `id = '${customer}' LIMIT 1`;
-    _getCustData(fieldsParam, cond).then((custData: object) => {
+    _getCustData(fieldsParam, customer).then((custData: object) => {
       allCustData = { ...allCustData, [customer]: custData };
     }).catch(() => {
       const custData = 'Customer data unavailable';
@@ -60,7 +57,7 @@ export const getCustomerDetails = (req: Request, res: Response,
 export const getNews = (req: Request, res: Response,
   next: NextFunction): void => {
   const customersStr: string = decodeURIComponent(req.params.customers);
-  const customers: Array<string> = _splitStrData(customersStr);
+  const customers: Array<string> = splitStrData(customersStr);
   const fieldsParam = 'news_article_1, news_article_2, news_article_3, news_article_4, '
   + 'news_title_1, news_title_2, news_title_3, news_title_4, '
   + 'news_url_1, news_url_2, news_url_3, news_url_4, '
@@ -70,8 +67,7 @@ export const getNews = (req: Request, res: Response,
   let allCustData: object = {};
   let iterationsLeft: number = customers.length;
   customers.forEach((customer: string) => {
-    const cond = `id = '${customer}' LIMIT 1`;
-    _getCustData(fieldsParam, cond).then((custData: object) => {
+    _getCustData(fieldsParam, customer).then((custData: object) => {
       allCustData = { ...allCustData, [customer]: custData };
     }).catch(() => {
       const custData = 'Customer data unavailable';
@@ -98,17 +94,26 @@ export const postNews = (req: Request, res: Response,
     toUpload[`news_url_${i}`] = news.urls[i - 1];
     toUpload[`news_imgurl_${i}`] = news.imgurls[i - 1];
   }
-  const cond = `(id = '${customer}')`;
 
-  _editCustomerData(toUpload, cond).then(() => {
+  _editCustomerData(toUpload, customer).then(() => {
     res.status(200).json({ success: true });
   }).catch((err: Error) => next({ err }));
 };
 
-const _editCustomerData = (toAdd: object, cond: string): Promise<MySQLResponse> => {
+export const postAddReqUpload = (req: Request, res: Response,
+  next: NextFunction): void => {
+  const { customer } = req.params;
+  const { upload }: { upload: Array<string> } = req.body;
+  const uploadStr = convArrToSQL(upload);
+  _editCustomerData({ req_upload: uploadStr }, customer).then(() => {
+    res.status(200).json({});
+  }).catch((err: Error) => next({ err }));
+};
+
+const _editCustomerData = (toAdd: object, customer: string): Promise<MySQLResponse> => {
   let sqlCommand = `UPDATE ${cfg.db_details.cust_dir_table} SET `;
   let first = true;
-
+  const cond = `id = '${customer}' LIMIT 1`;
   Object.entries(toAdd).forEach(([column, detail]: [string, string]) => {
     if (!first) {
       sqlCommand += ', ';
@@ -131,11 +136,6 @@ const _editCustomerData = (toAdd: object, cond: string): Promise<MySQLResponse> 
       return resolve(rs);
     });
   });
-};
-
-const _splitStrData = (data: string): Array<string> => {
-  const splitData: Array<string> = data.split('|');
-  return splitData;
 };
 
 /**

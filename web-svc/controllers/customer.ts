@@ -55,6 +55,16 @@ export const postEditDetails = (req: Request, res: Response,
   });
 };
 
+export const postAddReqUpload = (req: Request, res: Response,
+  next: NextFunction): void => {
+  const { customer } = req.params;
+  const { upload }: { upload: Array<string> } = req.body;
+  const apiUrl = `${endpoints.db.full_url}/customer/${customer}/upload/add`;
+  axios.post(apiUrl, { upload }).then(() => {
+    res.status(200).json({ msg: 'Uploads added' });
+  }).catch((err: Error) => next({ err }));
+};
+
 function _dbEditDetails(customer: string,
   details: object): Promise<AxiosResponse> {
   const apiUrl = `${endpoints.db.full_url}/customer/${customer}/details/edit`;

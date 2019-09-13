@@ -33,3 +33,19 @@ export const formatString = (str: string): string => {
 
 export const destructureSQL = (command: string):
   Array<string> => command.split(',');
+
+export const convArrToSQL = (obj: Array<string>): string => {
+  let str = '';
+  let first = true;
+  obj.forEach((ele: string) => {
+    if (!first) str += '|';
+    str += ele;
+    first = false;
+  });
+  return str;
+};
+
+export const splitStrData = (data: string): Array<string> => {
+  const splitData: Array<string> = data.split('|');
+  return splitData;
+};
