@@ -1,0 +1,26 @@
+{
+  "name": "calendar",
+  "version": "1.0.0",
+  "description": "its a calendar",
+  "main": "cal_js.js",
+  "style": "cal_css.css",
+  "scripts": {
+    "start": "cal"
+  },
+  "repository": {
+    "type": "git",
+    "url": "f10-hack"
+  },
+  "keywords": [
+    "calendar"
+  ],
+  "author": "rahul",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "jqueryui": "^1.11.1",
+    "ng": "0.0.0",
+    "popper.js": "1.15.0"
+  }
+}

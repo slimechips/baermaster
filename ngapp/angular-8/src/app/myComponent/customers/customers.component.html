@@ -1,0 +1,49 @@
+<div *ngIf="customersLoaded" >
+    <div *ngFor="let customer of customersArr" class="row">
+        <div  class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="profile-pic__wrapper">
+                                <div class="profile-pic">
+                                    <img [src]='customer.profile_pic'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 d-flex flex-column">
+                            <div class="profile-name-title text-left">
+                                {{customer.name}}
+                            </div>
+                            <div class="profile-status text-left">
+                            <i class="mdi mdi-briefcase"></i>
+                                {{customer.jobs}}
+                            </div>
+                            <div class="profile-status text-left">
+                                <i class="mdi mdi-email"></i>
+                                {{customer.email}}
+                            </div>
+                            <div class="profile-status text-left">
+                                <i class="mdi mdi-cellphone"></i>
+                                {{customer.mobile_number}}
+                            </div>
+                            <div class="profile-status text-left">
+                                Interests
+                            </div>
+                            <div class="profile-desc text-left">
+                                <div>{{customer.interests_industry}}</div>
+                                <div>{{customer.interests_company}}</div>
+                                <div>{{customer.interests_risk}}</div>
+                                <div>{{customer.interests_inv_type}}</div>
+                            </div>
+                            <br/>
+                            {{customer.description}}
+                            <br/>
+                            <button (click)="more(customer.id)" class="btn btn-primary mt-auto ml-auto w-50">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

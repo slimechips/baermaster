@@ -1,0 +1,31 @@
+{
+  "web": {
+    "url_scheme": "http://",
+    "service_name": "web-svc",
+    "local_host": "localhost",
+    "http_port": 3030,
+    "path": ""
+  },
+  "ngapp": {},
+  "asp": {
+    "url_scheme": "http://",
+    "service_name": "asp-svc",
+    "local_host": "localhost",
+    "http_port": 3032,
+    "path": ""
+  },
+  "db": {
+    "url_scheme": "http://",
+    "service_name": "db-svc",
+    "local_host": "localhost",
+    "http_port": 3034,
+    "path": ""
+  },
+  "news": {
+    "url_scheme": "http://",
+    "service_name": "news-svc",
+    "local_host": "localhost",
+    "http_port": 3036,
+    "path": ""
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "articles": [
+    "CUPERTINO — Apple Inc revealed on Tuesday that its streaming TV service will kick off Nov. 1 and cost $5.99 a month in Canada, as the tech giant reaches a turning point where it focuses as much on services as its hardware and software. Apple TV+ will be avai",
+    "McDonald’s Corp. is making a bet it can automate the task of taking drive-thru orders. The world’s biggest restaurant company is buying startup Apprente Inc., a developer of voice-recognition technology for use in the restaurant industry, to help speed up li",
+    "CALGARY – Enbridge Inc. is firing back at companies that have criticized its plans to revamp the operation of Canada’s largest oil export pipeline network. In a filing Wednesday with the Canadian Energy Regulator, Enbridge responded to a deluge of complaints",
+    "New Democratic Party Leader Jagmeet Singh was out of the gate quickly, a good strategic move since his opening salvo will do nothing to separate him from the other parties in the election race. “No more catering to big corporations or the ultra-rich,” Singh "
+  ],
+  "titles": [
+    "Apple’s streaming TV service to cost $4.99 a month, launch Nov. 1",
+    "McDonald’s gets closer to automated drive-thru with purchase of tech startup",
+    "Enbridge urges regulator to avoid intervening in pipeline plan",
+    "The election may be about the economy, but don’t tell business"
+  ],
+  "urls": [
+    "https://business.financialpost.com/technology/personal-tech/apple-to-reveal-streaming-service-prices-while-iphones-in-holding-pattern-until-5g",
+    "https://business.financialpost.com/news/retail-marketing/mcdonalds-buys-startup-to-add-automated-drive-thru-ordering",
+    "https://business.financialpost.com/commodities/enbridge-urges-regulator-to-avoid-intervening-in-pipeline-plan",
+    "https://business.financialpost.com/news/economy/the-election-may-be-about-the-economy-but-dont-tell-business"
+  ],
+  "imgurls": [
+    "https://financialpostcom.files.wordpress.com/2019/09/cook.jpg",
+    "https://financialpostcom.files.wordpress.com/2019/09/mcdonalds.jpg",
+    "https://financialpostcom.files.wordpress.com/2019/09/aenbridge_agl_eco.jpg",
+    "https://financialpostcom.files.wordpress.com/2019/09/acanada-election_.1.jpg"
+  ]
+}

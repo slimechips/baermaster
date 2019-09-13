@@ -1,0 +1,32 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../ngapp"
+		},
+		{
+			"path": "../web-svc"
+		},
+		{
+			"path": "../f10-util"
+		},
+		{
+			"path": "../asp-svc"
+		},
+		{
+			"path": "../db-svc"
+		},
+		{
+			"path": "../Python_NLP_backend"
+		},
+		{
+			"path": "../Calendar"
+		},
+		{
+			"path": "../news-svc"
+		}
+	],
+	"settings": {}
+}

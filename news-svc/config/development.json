@@ -1,0 +1,10 @@
+{
+  "service": "news-svc",
+  "endpoints_file": "../etc/endpoints.json",
+  "client_secret": "secret",
+  "nlp_dir": "python-nlp",
+  "nlp_file": "python-nlp/main_file.py",
+  "buzzword_dir": "buzzwords",
+  "data_dir": "outdata",
+  "anaconda_python": "/home/slimechips/anaconda3/bin/python"
+}

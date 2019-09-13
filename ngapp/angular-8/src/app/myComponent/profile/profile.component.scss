@@ -1,0 +1,42 @@
+.profile-pic__wrapper {
+  display: block;
+  position: relative;
+
+  margin-left: auto;
+  margin-right: auto;
+  .profile-pic {
+    width: 250px;
+    height: 250px;
+    border-radius: 100%;
+    margin: 0 auto;
+    img {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid rgba(120,130,140,.13);
+      border-radius: 100%;
+    }
+  }
+
+}
+
+.profile-name-title {
+  margin-top: 10px;
+  font-size: 36px;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.profile-descrip {
+  margin-top: 10px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 400;
+  color: #b9b9b9;
+}
+
+.profile-status {
+    margin-top: 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
