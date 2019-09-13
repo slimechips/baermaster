@@ -10,6 +10,7 @@ import { errorHandler } from 'f10-util/error';
 
 // Controllers
 import * as userController from './controllers/user';
+import * as custController from './controllers/customer';
 
 const app: express.Application = express();
 
@@ -19,7 +20,11 @@ app.use(cookieParser(cfg.client_secret)); // Cookie MiddleWare
 app.use(reqLogger); // Logger Middleware
 
 // Add custom routes here
-app.get('/login', userController.getLogin);
+userController.router.get('/login', userController.getLogin);
+custController.router.get('/login', custController.getLogin);
+
+app.use('/customer', custController.router);
+app.use('/user', userController.router);
 
 // Error Handling Middleware goes here
 app.use(errorHandler);

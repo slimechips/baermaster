@@ -14,11 +14,11 @@ export const getLogin = (req: Request, res: Response, next: NextFunction): void 
   const { username, password } = req.query;
 
   _tryGetIdToken(username).then((cacheValue: UserCacheValue) => {
-    _sendLoginCookies(res, cacheValue.username, cacheValue.idToken,
+    _sendLoginCookies(res, cacheValue.id, cacheValue.idToken,
       cacheValue.expiry);
     res.status(200).json({
       login_success: true,
-      username: cacheValue.username,
+      username: cacheValue.id,
     });
   }).catch(() => _reqNewIdToken(username, password))
     .then((idTokenObj: IdTokenRes | void) => {
@@ -61,17 +61,6 @@ export const getCustomers = (req: Request, res: Response,
     });
 };
 
-const _tryGetIdToken = (username: string): Promise<UserCacheValue> => (
-  new Promise<UserCacheValue>((resolve, reject): void => {
-    userCache.get(username, (err, val: object | undefined): void => {
-      if (!err || val === undefined) {
-        reject(new Error('Id token not found'));
-      }
-      resolve(val as UserCacheValue);
-    });
-  })
-);
-
 export const getNews = (req: Request, res: Response, next: NextFunction): void => {
   const { username } = req.params;
   const { customer_ids: customerIds } = req.query;
@@ -96,6 +85,17 @@ export const getNews = (req: Request, res: Response, next: NextFunction): void =
   }).catch((err) => next({ err }));
 };
 
+const _tryGetIdToken = (username: string): Promise<UserCacheValue> => (
+  new Promise<UserCacheValue>((resolve, reject): void => {
+    userCache.get(username, (err, val: object | undefined): void => {
+      if (!err || val === undefined) {
+        reject(new Error('Id token not found'));
+      }
+      resolve(val as UserCacheValue);
+    });
+  })
+);
+
 function _sendLoginCookies(res: Response, username: string,
   idToken: string, expiry: number): void {
   res.cookie('username', username, {
@@ -114,7 +114,7 @@ function _sendLoginCookies(res: Response, username: string,
 }
 
 const _reqNewIdToken = (username: string, password: string): Promise<IdTokenRes> => {
-  const getUrl = `${endpoints.asp.full_url}/login`
+  const getUrl = `${endpoints.asp.full_url}/user/login`
     + `?username=${username}&password=${password}`;
   return new Promise<IdTokenRes>((resolve, reject): void => {
     axios.get(getUrl).then((resp) => {

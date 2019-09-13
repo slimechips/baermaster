@@ -27,6 +27,8 @@ custController.router.post('/:customer/details/edit', custController.postEditDet
 custController.router.get('/:customers/getdetails', custController.getCustomerDetails);
 custController.router.get('/:customers/getcurnews', custController.getNews);
 custController.router.post('/:customer/setnews', custController.postNews);
+custController.router.get('/:id/password', custController.getPassword);
+
 
 // Add custom controller routes here
 app.use('/user', userController.router);

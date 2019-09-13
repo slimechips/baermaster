@@ -29,6 +29,7 @@ userController.router.get('/:username/news', userController.getNews);
 
 // Init Customer controller internal routes here
 custController.router.post('/:customer/details/edit', custController.postEditDetails);
+custController.router.get('/login', custController.getLogin);
 
 // Add custom routes here
 app.use('/user', userController.router);

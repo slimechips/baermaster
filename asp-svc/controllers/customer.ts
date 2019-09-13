@@ -8,7 +8,7 @@ export const router = Router();
 interface IdTokenRes {
   idToken: string;
   expiresIn: number;
-  username: string;
+  id: string;
 }
 
 /**
@@ -18,17 +18,17 @@ interface IdTokenRes {
  */
 export const getLogin = (req: Request, res: Response, next: NextFunction) => {
   const {
-    username,
+    id,
     password,
   } = req.query;
 
-  checkUserCredentials(username, password).then(() => generateIdToken(username))
+  checkCustomerCredentials(id, password).then(() => generateIdToken(id))
     .then((idTokenObj) => {
       const status: number = 200;
       const json: object = {
         id_token: idTokenObj.idToken,
         expiry: idTokenObj.expiresIn,
-        username: idTokenObj.username,
+        username: idTokenObj.id,
       };
       res.status(status).json(json);
     }).catch((err) => {
@@ -43,11 +43,11 @@ interface DBLoginRes {
 
 /**
  * Check if user credentials are valid
- * @param username username
+ * @param id username
  * @param password pw
  */
-function checkUserCredentials(username: string, password: string): Promise<DBLoginRes> {
-  const getUrl = `${endpoints.db.full_url}/user/${username}/password`;
+function checkCustomerCredentials(id: string, password: string): Promise<DBLoginRes> {
+  const getUrl = `${endpoints.db.full_url}/customer/${id}/password`;
   return new Promise((resolve, reject) => {
     axios.get(getUrl).then((resp) => {
       if (resp.status >= 400 || resp.data.password !== password) {
@@ -64,8 +64,8 @@ function checkUserCredentials(username: string, password: string): Promise<DBLog
 /**
  * Generate ID token (fake)
  */
-function generateIdToken(username: string): IdTokenRes {
+function generateIdToken(id: string): IdTokenRes {
   const idToken = rand.generate({ length: 50, charset: 'alphanumeric' });
   const expiresIn = 3600 * 24;
-  return { idToken, expiresIn, username };
+  return { idToken, expiresIn, id };
 }

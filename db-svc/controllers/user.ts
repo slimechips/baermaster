@@ -6,7 +6,6 @@ import { FFData } from '../models/FFData';
 // Init router here
 export const router = Router();
 
-
 export const getPassword = (req: Request, res: Response,
   next: NextFunction): void => {
   const cond = `username = '${req.params.username}' LIMIT 1`;

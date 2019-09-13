@@ -4,6 +4,7 @@ import { pool } from './init';
 import { MySQLResponse } from '../models/MySQLResponse';
 import { getGenericData, formatString } from './common';
 import { NewsDetails, NewsObj } from '../models/NewsDetails';
+import { CustData } from '../models/CustData';
 
 export const router = Router();
 
@@ -17,6 +18,18 @@ export const postEditDetails = (req: Request, res: Response,
   _editCustomerData(details, cond).then(() => {
     res.status(200).json({ success: true });
   }).catch((err: Error) => next({ err }));
+};
+
+export const getPassword = (req: Request, res: Response,
+  next: NextFunction): void => {
+  const cond = `id = '${req.params.id}' LIMIT 1`;
+  _getCustData('password', cond).then((rs: CustData) => {
+    const json: object = {
+      id: req.params.id,
+      password: rs.password,
+    };
+    res.status(200).send(json);
+  }).catch((err) => next({ err }));
 };
 
 export const getCustomerDetails = (req: Request, res: Response,
@@ -96,7 +109,7 @@ const _editCustomerData = (toAdd: object, cond: string): Promise<MySQLResponse> 
   let sqlCommand = `UPDATE ${cfg.db_details.cust_dir_table} SET `;
   let first = true;
 
-  Object.entries(toAdd).forEach(([column, detail]: [string, string] ) => {
+  Object.entries(toAdd).forEach(([column, detail]: [string, string]) => {
     if (!first) {
       sqlCommand += ', ';
     } else {
@@ -131,5 +144,5 @@ const _splitStrData = (data: string): Array<string> => {
  * @param cond Which condition(customer) to get from
  */
 const _getCustData = (fieldsParam: string,
-  cond: string): Promise<object> => getGenericData('Customer',
-    cfg.db_details.cust_dir_table, fieldsParam, cond) as Promise<object>;
+  cond: string): Promise<CustData> => getGenericData('Customer',
+    cfg.db_details.cust_dir_table, fieldsParam, cond) as Promise<CustData>;

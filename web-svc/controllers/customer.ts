@@ -1,9 +1,48 @@
 import { Response, Request, NextFunction, Router } from 'express'; // eslint-disable-line
 import { endpoints } from 'f10-util/configs';
 import axios from 'f10-util/axios';
+import NodeCache from 'node-cache';
 import { AxiosResponse } from 'axios';
+import { CustCacheValue } from '../models/CustCacheValue';
+import { IdTokenRes } from '../models/IdTokenRes';
+
+const custCache: NodeCache = new NodeCache();
 
 export const router = Router();
+
+export const getLogin = (req: Request, res: Response, next: NextFunction): void => {
+  const { username: id, password } = req.query;
+
+  _tryGetIdToken(id).then((cacheValue: CustCacheValue) => {
+    _sendLoginCookies(res, cacheValue.id, cacheValue.idToken,
+      cacheValue.expiry);
+    res.status(200).json({
+      login_success: true,
+      id: cacheValue.id,
+    });
+  }).catch(() => _reqNewIdToken(id, password))
+    .then((idTokenObj: IdTokenRes | void) => {
+      if (idTokenObj === undefined) {
+        throw new Error();
+      }
+      const { idToken, expiresIn } = idTokenObj;
+      const loginResponse: object = {
+        loginStatus: true,
+        idToken,
+        username: id,
+      };
+      _sendLoginCookies(res, id, idToken, expiresIn);
+      res.status(200).json(loginResponse);
+    })
+    .catch((err) => {
+      const extraParams: object = { loginStatus: false };
+      next({
+        err,
+        extraParams,
+        msg: 'Login failed: Wrong id/Password',
+      });
+    });
+};
 
 export const postEditDetails = (req: Request, res: Response,
   next: NextFunction): void => {
@@ -27,3 +66,50 @@ function _dbEditDetails(customer: string,
     }).catch(reject);
   });
 }
+
+const _tryGetIdToken = (id: string): Promise<CustCacheValue> => (
+  new Promise<CustCacheValue>((resolve, reject): void => {
+    custCache.get(id, (err, val: object | undefined): void => {
+      if (!err || val === undefined) {
+        reject(new Error('Id token not found'));
+      }
+      resolve(val as CustCacheValue);
+    });
+  })
+);
+
+function _sendLoginCookies(res: Response, id: string,
+  idToken: string, expiry: number): void {
+  res.cookie('id', id, {
+    expires: new Date(expiry * 1000 + Date.now()),
+    httpOnly: false,
+    secure: false,
+    domain: 'localhost',
+    path: '/login',
+  });
+
+  res.cookie('id_token', idToken, {
+    expires: new Date(expiry * 1000 + Date.now()),
+    httpOnly: false,
+    secure: false,
+  });
+}
+
+const _reqNewIdToken = (id: string, password: string): Promise<IdTokenRes> => {
+  const getUrl = `${endpoints.asp.full_url}/customer/login`
+    + `?id=${id}&password=${password}`;
+  return new Promise<IdTokenRes>((resolve, reject): void => {
+    axios.get(getUrl).then((resp) => {
+      if (resp.status >= 400 || resp.data.id_token === undefined) {
+        reject(new Error('Server Returned Error'));
+      } else {
+        const idTokenRes: IdTokenRes = {
+          idToken: resp.data.id_token,
+          username: resp.data.id,
+          expiresIn: resp.data.expiry,
+        };
+        resolve(idTokenRes);
+      }
+    }).catch(reject);
+  });
+};
