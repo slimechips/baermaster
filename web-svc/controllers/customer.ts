@@ -73,6 +73,13 @@ export const getReqUpload = (req: Request, res: Response, next: NextFunction): v
   }).catch((err: AxiosError) => next({ err }));
 };
 
+export const getDetails = (req: Request, res: Response, next: NextFunction): void => {
+  const { customer } = req.params;
+  _getCustDataDB(customer).then((customerRes: object) => {
+    res.status(200).json(customerRes);
+  }).catch((err: Error) => next({ err }));
+};
+
 function _dbEditDetails(customer: string,
   details: object): Promise<AxiosResponse> {
   const apiUrl = `${endpoints.db.full_url}/customer/${customer}/details/edit`;
@@ -128,6 +135,20 @@ const _reqNewIdToken = (id: string, password: string): Promise<IdTokenRes> => {
         };
         resolve(idTokenRes);
       }
+    }).catch(reject);
+  });
+};
+
+const _getCustDataDB = (customer: string): Promise<object> => {
+  const encCustomer = encodeURIComponent(customer);
+  const getUrl = `${endpoints.db.full_url}/customer/${encCustomer}/getdetails/`;
+
+  return new Promise<object>((resolve, reject): void => {
+    axios.get(getUrl).then((rs: AxiosResponse) => {
+      if (rs.data.customer_dets === undefined) {
+        return reject(new Error('Couldnt get Customer Details'));
+      }
+      return resolve(rs.data);
     }).catch(reject);
   });
 };

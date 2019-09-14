@@ -28,6 +28,7 @@ userController.router.get('/:username/customers/get', userController.getCustomer
 userController.router.get('/:username/news', userController.getNews);
 
 // Init Customer controller internal routes here
+custController.router.get('/:customer/details/get', custController.getDetails);
 custController.router.post('/:customer/details/edit', custController.postEditDetails);
 custController.router.get('/login', custController.getLogin);
 custController.router.post('/:customer/upload/add', custController.postAddReqUpload);
