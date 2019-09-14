@@ -28,7 +28,11 @@ export const getGenericData = (rowType: string, table: string,
 };
 
 export const formatString = (str: string): string => {
-  return str.replace(/"/g, '\'');
+  try {
+    return str.replace(/"/g, '\'');
+  } catch {
+    return str;
+  }
 };
 
 export const destructureSQL = (command: string):
