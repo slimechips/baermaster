@@ -112,7 +112,8 @@ export const postAddReqUpload = (req: Request, res: Response,
 
 export const getReqUpload = (req: Request, res: Response, next: NextFunction): void => {
   const { customer } = req.params;
-  _getCustData('req_upload', customer).then((custData: CustData) => {
+  const cond = `id = ${customer}`;
+  _getCustData('req_upload', cond).then((custData: CustData) => {
     const eCustData = splitStrData(custData.req_upload);
     res.status(200).json({ upload: eCustData });
   }).catch((err: Error) => next({ err }));
@@ -149,8 +150,8 @@ const _editCustomerData = (toAdd: object, customer: string): Promise<MySQLRespon
 /**
  * Get data about a customerr
  * @param fieldsParam Fields to get info about
- * @param cond Which condition(customer) to get from
+ * @param customer Which condition(customer) to get from
  */
 const _getCustData = (fieldsParam: string,
-  cond: string): Promise<CustData> => getGenericData('Customer',
-    cfg.db_details.cust_dir_table, fieldsParam, cond) as Promise<CustData>;
+  customer: string): Promise<CustData> => getGenericData('Customer',
+    cfg.db_details.cust_dir_table, fieldsParam, `id = '${customer}'`) as Promise<CustData>;
