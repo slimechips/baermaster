@@ -2,6 +2,7 @@
   "service": "gather-svc",
   "endpoints_file": "../etc/endpoints.json",
   "client_secret": "secret",
+  "namescan_url": "https://namescan.io/api/v2/person-scans/",
   "zws": {
     "zws_id": "X1-ZWz1hch4zhog7f_13bwv",
     "sample_address": "2114+Bigelow+Ave",
