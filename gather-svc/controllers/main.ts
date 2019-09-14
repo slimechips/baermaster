@@ -1,9 +1,11 @@
 import { Response, Request, NextFunction, Router } from 'express'; // eslint-disable-line
 import axios from 'f10-util/axios';
+import fs from 'fs';
+import path from 'path';
 import { parseString } from 'xml2js';
 import { AxiosResponse } from 'axios';
 import { promisify } from 'util';
-import { cfg, endpoints } from 'f10-util/configs';
+import { cfg, endpoints, appDir } from 'f10-util/configs';
 import { DeepSearchObj } from '../models/DeepSearchObj';
 import { CustomerPDataObj } from '../models/CustomerPData';
 import { GatherObj } from '../models/GatherObj';
@@ -15,17 +17,26 @@ export const router = Router();
 const parseStringAsync: Function = promisify(parseString);
 
 export const gatherA = (req: Request, res: Response, next: NextFunction): void => {
-  const { customer } = req.params;
-  const body: GatherObj = {};
-  _retrieveCustPData(customer)
+  let { customer } = req.params;
+  customer = 'John Smith';
+  const bodySend: GatherObj = {};
+  bodySend.basic_data = _gatherBasicData(customer);
+  _gatherExData(customer)
+    .then((obj: object) => {
+      bodySend.ex_data = obj;
+    })
     .then(() => _gatherZillow(cfg.zws.sample_address,
       cfg.zws.sample_citystatezip))
     .then((deepSearchObj: DeepSearchObj) => {
-      body.zillow = deepSearchObj;
+      bodySend.zillow = deepSearchObj;
     })
-    .then(() => sleep(5000))
     .then(() => {
-      res.status(200).json(body);
+      console.log(bodySend);
+      res.status(200).json(bodySend);
+    })
+    .then(() => {
+      const writePath = path.join(appDir, 'custdata.json');
+      fs.writeFileSync(writePath, JSON.stringify(bodySend));
     })
     .catch((err: Error) => next({ err }));
 };
@@ -50,6 +61,37 @@ const _gatherZillow = (address: string,
       .catch(reject);
   });
 };
+
+const _gatherBasicData =  (customer: string): object => {
+  const filePath = path.join(appDir, './customer.json');
+  const basicData = JSON.parse(fs.readFileSync(filePath).toString());
+  // Insert MEthod to get data here
+  return basicData;
+};
+
+const _gatherExData = (customer: string): Promise<object> => {
+  const apiUrl = `${cfg.namescan_url}/emerald`;
+  const headers = {
+    Accept: 'application/json',
+    'api-key': '4951327B013F4D10BD8066F8E833A7A9',
+  };
+
+  const body = {
+    name: 'John Smith',
+    first_name: 'John',
+    last_name: 'Smith',
+    gender: 'male',
+    dob: '1975',
+    country: 'United States',
+    list_type: 'pep',
+    match_rate: 50,
+  };
+  return new Promise<object>((resolve, reject): void => {
+    axios.post(apiUrl, body, { headers })
+      .then((rs: AxiosResponse) => resolve(rs.data))
+      .catch(reject);
+  });
+}
 
 function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
