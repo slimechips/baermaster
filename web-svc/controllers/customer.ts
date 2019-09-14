@@ -2,7 +2,7 @@ import { Response, Request, NextFunction, Router } from 'express'; // eslint-dis
 import { endpoints } from 'f10-util/configs';
 import axios from 'f10-util/axios';
 import NodeCache from 'node-cache';
-import { AxiosResponse } from 'axios';
+import { AxiosResponse, AxiosError } from 'axios';
 import { CustCacheValue } from '../models/CustCacheValue';
 import { IdTokenRes } from '../models/IdTokenRes';
 
@@ -63,6 +63,14 @@ export const postAddReqUpload = (req: Request, res: Response,
   axios.post(apiUrl, { upload }).then(() => {
     res.status(200).json({ msg: 'Uploads added' });
   }).catch((err: Error) => next({ err }));
+};
+
+export const getReqUpload = (req: Request, res: Response, next: NextFunction): void => {
+  const { customer } = req.params;
+  const apiUrl = `${endpoints.db.full_url}/customer/${customer}/upload/get`;
+  axios.get(apiUrl).then((rs: AxiosResponse) => {
+    res.status(200).json(rs.data);
+  }).catch((err: AxiosError) => next({ err }));
 };
 
 function _dbEditDetails(customer: string,

@@ -31,6 +31,7 @@ userController.router.get('/:username/news', userController.getNews);
 custController.router.post('/:customer/details/edit', custController.postEditDetails);
 custController.router.get('/login', custController.getLogin);
 custController.router.post('/:customer/upload/add', custController.postAddReqUpload);
+custController.router.get('/:customer/upload/get', custController.getReqUpload);
 
 // Add custom routes here
 app.use('/user', userController.router);

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction, Router } from 'express';
 import { cfg } from 'f10-util/configs';
 import { pool } from './init';
 import { MySQLResponse } from '../models/MySQLResponse';
-import { getGenericData, formatString, convArrToSQL, splitStrData } from './common';
+import { getGenericData, formatString, convArrToSQL, splitStrData, destructureSQL } from './common';
 import { NewsDetails, NewsObj } from '../models/NewsDetails';
 import { CustData } from '../models/CustData';
 
@@ -107,6 +107,14 @@ export const postAddReqUpload = (req: Request, res: Response,
   const uploadStr = convArrToSQL(upload);
   _editCustomerData({ req_upload: uploadStr }, customer).then(() => {
     res.status(200).json({});
+  }).catch((err: Error) => next({ err }));
+};
+
+export const getReqUpload = (req: Request, res: Response, next: NextFunction): void => {
+  const { customer } = req.params;
+  _getCustData('req_upload', customer).then((custData: CustData) => {
+    const eCustData = splitStrData(custData.req_upload);
+    res.status(200).json({ upload: eCustData });
   }).catch((err: Error) => next({ err }));
 };
 

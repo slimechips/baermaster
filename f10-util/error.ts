@@ -31,7 +31,11 @@ export const errorHandler = (options: Options, _req: Request, res: Response
   let errorMsg: string;
 
   if (msg === undefined || msg === true) {
-    errorMsg = err.stack || 'Unknown Error';
+    if (err !== undefined) {
+      errorMsg = err.stack || 'Unknown Error';
+    } else {
+      errorMsg = 'Unknown Error 1';
+    }
   } else if (msg === null) {
     if (status === 500) {
       errorMsg = 'Internal Server Error';

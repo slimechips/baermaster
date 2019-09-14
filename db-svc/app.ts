@@ -29,6 +29,7 @@ custController.router.get('/:customers/getcurnews', custController.getNews);
 custController.router.post('/:customer/setnews', custController.postNews);
 custController.router.get('/:id/password', custController.getPassword);
 custController.router.post('/:customer/upload/add', custController.postAddReqUpload);
+custController.router.get('/:cusomter/upload/get', custController.getReqUpload);
 
 // Add custom controller routes here
 app.use('/user', userController.router);
