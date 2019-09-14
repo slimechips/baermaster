@@ -73,6 +73,14 @@ export const getReqUpload = (req: Request, res: Response, next: NextFunction): v
   }).catch((err: AxiosError) => next({ err }));
 };
 
+export const getProcess = (req: Request, res: Response, next: NextFunction): void => {
+  const { customer } = req.params;
+  const apiUrl = `${endpoints.gather.full_url}/gather/${customer}/a`;
+  axios.get(apiUrl).then((rs: AxiosResponse) => {
+    res.status(200).json(rs.data);
+  }).catch((err: AxiosError) => next({ err }));
+};
+
 function _dbEditDetails(customer: string,
   details: object): Promise<AxiosResponse> {
   const apiUrl = `${endpoints.db.full_url}/customer/${customer}/details/edit`;

@@ -27,5 +27,12 @@
     "local_host": "localhost",
     "http_port": 3036,
     "path": ""
+  },
+  "gather": {
+    "url_scheme": "http://",
+    "service_name": "gather-svc",
+    "local_host": "localhost",
+    "http_port": 3038,
+    "path": ""
   }
 }

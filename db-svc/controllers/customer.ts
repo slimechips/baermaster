@@ -2,7 +2,7 @@ import { Request, Response, NextFunction, Router } from 'express';
 import { cfg } from 'f10-util/configs';
 import { pool } from './init';
 import { MySQLResponse } from '../models/MySQLResponse';
-import { getGenericData, formatString, convArrToSQL, splitStrData, destructureSQL } from './common';
+import { getGenericData, formatString, convArrToSQL, splitStrData } from './common';
 import { NewsDetails, NewsObj } from '../models/NewsDetails';
 import { CustData } from '../models/CustData';
 

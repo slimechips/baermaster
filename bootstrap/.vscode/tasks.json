@@ -84,6 +84,26 @@
       "problemMatcher": []
     },
     {
+      "label": "run-gather-svc",
+      "type": "shell",
+      "isBackground": false,
+      "command": "npm",
+      "args": ["run", "dev:debug"],
+    "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/../gather-svc"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
       "label": "run-all",
       "group": "build",
       "dependsOn": [
@@ -91,6 +111,7 @@
         "run-asp-svc",
         "run-db-svc",
         "run-news-svc",
+        "run-gather-svc",
       ]
     }
   ]
