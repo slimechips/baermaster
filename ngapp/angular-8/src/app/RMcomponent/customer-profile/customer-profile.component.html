@@ -1,0 +1,58 @@
+<div class="card">
+    <div class="card-body">
+        <form #f="ngForm" (ngSubmit)="save(f)" novalidate>
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" name="name" [ngModel]="curCustomerData.name">
+            </div>
+            <div class="form-group">
+                <label>Jobs</label>
+                <input type="text" class="form-control" name="jobs" [ngModel]="curCustomerData.jobs">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email" [ngModel]="curCustomerData.email">
+            </div>
+            <div class="form-group">
+                <label>Mobile</label>
+                <input type="text" class="form-control" name="mobile_number" [ngModel]="curCustomerData.mobile_number">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" class="form-control" name="description" [ngModel]="curCustomerData.description">
+            </div>
+            <label class="font-weight-bold">Interests</label>
+            <div class="form-group row">
+                <label class="col-md-2 pt-2">Country</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="interests_country" [ngModel]="curCustomerData.interests_country">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 pt-2">Company</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="interests_company" [ngModel]="curCustomerData.interests_company">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 pt-2">Investment types</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="interests_inv_type" [ngModel]="curCustomerData.interests_inv_type">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 pt-2">Industry</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="interests_industry" [ngModel]="curCustomerData.interests_industry">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 pt-2">Risk</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="interests_risk" [ngModel]="curCustomerData.interests_risk">
+                </div>
+            </div>
+            <button class="btn btn-primary">save</button>
+        </form>
+    </div>
+</div>

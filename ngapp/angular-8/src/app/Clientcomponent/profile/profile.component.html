@@ -1,0 +1,47 @@
+<div class="row" *ngIf="clientDataLoaded">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <br />
+                <div class="profile-pic__wrapper">
+                    <div class="profile-pic">
+                        <img [src]="clientData.profile_pic">
+                    </div>
+                </div>
+                <br />
+                <div class="profile-name-title text-center">
+                    {{clientData.name}}
+                </div>
+                <div class="profile-status text-center">
+                    {{clientData.description}}
+                </div>
+                <br />
+                <div class="profile-status text-center">
+                    <i class="mdi mdi-email"></i> {{clientData.email}}
+                </div>
+                <div class="profile-status text-center">
+                    <i class="mdi mdi-briefcase"></i> {{clientData.jobs}}
+                </div>
+                <div class="profile-status text-center">
+                    <i class="mdi mdi-cellphone"></i>
+                    {{clientData.mobile_number}}
+                </div>
+                <br/>
+                <div class="profile-status text-center">
+                    Interests
+                </div>
+                <div class="profile-desc text-center">
+                    <div>{{clientData.interests_industry}}</div>
+                    <div>{{clientData.interests_company}}</div>
+                    <div>{{clientData.interests_risk}}</div>
+                    <div>{{clientData.interests_inv_type}}</div>
+                </div>
+                <br/>
+                <div class="profile-descrip text-center">
+                    Joined {{join}}
+                </div>
+                <div class="text-center"><button class="btn btn-primary">Edit</button></div>
+            </div>
+        </div>
+    </div>
+</div>

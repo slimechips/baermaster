@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { customerNews } from '../myComponent/suggested-reading/suggested-reading-example';
-import { LoginComponent } from '../pages/login/login.component';
+import { customerNews } from '../RMcomponent/suggested-reading/suggested-reading-example';
+import { UserLoginComponent } from '../pages/user-login/login.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Subscriber, Observable } from 'rxjs';
@@ -48,7 +48,7 @@ export class NewsService
 
   public _getNewsCall(): Observable<any>
   {
-    const apiUrl = `${environment.webSvcBaseUrl}/user/${LoginComponent.username}/news`;
+    const apiUrl = `${environment.webSvcBaseUrl}/user/${UserLoginComponent.username}/news`;
     return this.http.get<any>(apiUrl);
   }
 }

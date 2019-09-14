@@ -1,0 +1,36 @@
+.register-container{
+    margin: 10% auto;
+    max-width: 600px;
+}
+.register-form-2{
+    padding: 5%;
+    background: white;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+.register-form-2 h2{
+    text-align: center;
+    color: black;
+    font-weight: bold;
+}
+.register-container form{
+    padding: 10%;
+}
+.btnSubmit
+{
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
+.register-form-2 .btnSubmit{
+    width: 100%;
+    font-weight: 600;
+    color: white;
+    background-color:black;
+}
+.register-form-2 .ForgetPwd{
+    color: black;
+    font-weight: 600;
+    text-decoration: none;
+}

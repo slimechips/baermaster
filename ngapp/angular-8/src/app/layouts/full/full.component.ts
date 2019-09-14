@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 declare var $: any;
@@ -13,7 +13,8 @@ export class FullComponent implements OnInit {
 
   public config: PerfectScrollbarConfigInterface = {};
 
-  constructor(public router: Router) {}
+  constructor(public router: Router,
+              private _route: ActivatedRoute) {}
 
   public innerWidth: any;
   public defaultSidebar: any;

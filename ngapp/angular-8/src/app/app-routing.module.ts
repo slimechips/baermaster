@@ -2,23 +2,38 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { ProfileComponent } from './myComponent/profile/profile.component';
-import { CustomersComponent } from './myComponent/customers/customers.component';
-import { SuggestedReadingComponent } from './myComponent/suggested-reading/suggested-reading.component';
-import { CustomerProfileComponent } from './myComponent/customer-profile/customer-profile.component';
-import { FullCalendarComponent } from './myComponent/full-calendar/full-calendar.component';
-import { StocksComponent } from './myComponent/stocks/stocks.component'
+import { UserLoginComponent } from './pages/user-login/login.component';
+import { UserRegisterComponent } from './pages/user-register/register.component';
+import { ProfileComponent } from './RMcomponent/profile/profile.component';
+import { CustomersComponent } from './RMcomponent/customers/customers.component';
+import { SuggestedReadingComponent } from './RMcomponent/suggested-reading/suggested-reading.component';
+import { CustomerProfileComponent } from './RMcomponent/customer-profile/customer-profile.component';
+import { FullCalendarComponent } from './RMcomponent/full-calendar/full-calendar.component';
+import { StocksComponent } from './RMcomponent/stocks/stocks.component'
+import { ClientLoginComponent } from './pages/customer-login/login.component';
+import { ClientRegisterComponent } from './pages/customer-register/register.component';
+import { ClientProfileComponent } from './Clientcomponent/profile/profile.component';
+import { ClientComponent } from './layouts/client/client.component';
+import { UploadComponent } from './Clientcomponent/upload/upload.component';
+import { TutorialComponent } from './Clientcomponent/tutorial/tutorial.component';
 
 export const Approutes: Routes = [
   {
-    path: '',
-    component: FullComponent,
-    children: [
-      { path: '', redirectTo: '/login', pathMatch: 'full' },
-      {
-        path: 'profile',
+    path: 'rm',
+    children: [{ path: '', redirectTo: '/rm/login', pathMatch: 'full' },
+    {
+        path: 'login',
+        component: UserLoginComponent
+    },
+    {
+        path: 'register',
+        component: UserRegisterComponent
+    },
+    {
+        path: '',
+        component: FullComponent,
+        children: [
+            { path: 'profile',
         component: ProfileComponent,
         data: {
           title: 'Profile',
@@ -58,23 +73,60 @@ export const Approutes: Routes = [
         data: {
           title: 'Calendar',
         }
-      }
+        }]
+    }]
+  },
+  {
+    path: 'client',
+    children: [{ path: '', redirectTo: '/client/login', pathMatch: 'full' },
+    {
+        path: 'login',
+        component: ClientLoginComponent
+    },
+    {
+        path: 'register',
+        component: ClientRegisterComponent
+    },
+    {
+        path: '',
+        component: ClientComponent,
+        children: [{
+            path: 'profile',
+            component: ClientProfileComponent,
+            data: {
+                title: 'Profile',
+              }
+        },
+        {
+            path: 'upload',
+            component: UploadComponent,
+            data: {
+                title: 'Upload your document to onboard',
+              }
+        },
+        {
+            path: 'tutorial',
+            component: TutorialComponent,
+            data: {
+                title: 'Tutorial sections',
+              }
+        }
     ]
+    }]
   },
   {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'register',
-    component: RegisterComponent
+        path: '',
+        component: FullComponent,
+        children: [{
+            path: 'component',
+            loadChildren: './component/component.module#ComponentsModule'
+      }]
   },
   {
     path: '**',
-    redirectTo: '/login',
+    redirectTo: '/rm/login',
     pathMatch: 'full'
-  },
-
+  }
 ];
 
 export const routingComponents = [ProfileComponent, CustomersComponent, SuggestedReadingComponent, CustomerProfileComponent];

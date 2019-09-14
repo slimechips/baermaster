@@ -28,12 +28,20 @@ import { SpinnerComponent } from './shared/spinner.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { LoginComponent } from './pages/login/login.component';
+import { UserLoginComponent } from './pages/user-login/login.component';
 import { AuthService } from './service/auth.service';
-import { RegisterComponent } from './pages/register/register.component';
-import { FullCalendarComponent } from './myComponent/full-calendar/full-calendar.component';
+import { UserRegisterComponent } from './pages/user-register/register.component';
+import { FullCalendarComponent } from './RMcomponent/full-calendar/full-calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { StocksComponent } from './myComponent/stocks/stocks.component';
+import { StocksComponent } from './RMcomponent/stocks/stocks.component';
+import { ClientLoginComponent } from './pages/customer-login/login.component';
+import { ClientRegisterComponent } from './pages/customer-register/register.component';
+import { ClientProfileComponent } from './Clientcomponent/profile/profile.component';
+import { ClientComponent } from './layouts/client/client.component';
+import { ClientSidebarComponent } from './shared/client-sidebar/client-sidebar.component';
+import { EditProfileComponent } from './Clientcomponent/edit-profile/edit-profile.component';
+import { UploadComponent } from './Clientcomponent/upload/upload.component';
+import { TutorialComponent } from './Clientcomponent/tutorial/tutorial.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -50,11 +58,19 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NavigationComponent,
     SidebarComponent,
     BreadcrumbComponent,
-    LoginComponent,
-    RegisterComponent,
+    UserLoginComponent,
+    UserRegisterComponent,
     routingComponents,
     FullCalendarComponent,
-    StocksComponent
+    StocksComponent,
+    ClientLoginComponent,
+    ClientRegisterComponent,
+    ClientProfileComponent,
+    ClientComponent,
+    ClientSidebarComponent,
+    EditProfileComponent,
+    UploadComponent,
+    TutorialComponent
   ],
   imports: [
     CommonModule,

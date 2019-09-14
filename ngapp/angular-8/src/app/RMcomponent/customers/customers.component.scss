@@ -1,0 +1,60 @@
+.profile-pic__wrapper {
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    .profile-pic {
+      width: 400px;
+      height: 400px;
+      border-radius: 100%;
+      margin: 0 auto;
+      img {
+        width: 100%;
+        border: 1px solid rgba(120,130,140,.13);
+        border-radius: 100%;
+      }
+    }
+  
+  }
+
+  .profile-descrip-container{
+      margin-block-start: 24px;
+      vertical-align: middle;
+  }
+  .profile-name-title {
+    margin-top: 10px;
+    font-size: 36px;
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+  
+  .profile-descrip {
+    margin-top: 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    color: #b9b9b9;
+  }
+  
+  .profile-status {
+      margin-top: 10px;
+      font-size: 20px;
+      margin-bottom: 10px;
+      font-weight: 400;
+    }
+    .button-bottom{
+        position: absolute;
+        margin-bottom: 0px;
+        margin-right: 0px;
+    }
+.green-border{
+    border: 5px solid #00c853;
+}
+
+.red-border{
+    border: 5px solid #bf360c;
+}
+
+.yellow-border{
+    border: 5px solid #f9a825;
+}

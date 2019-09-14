@@ -1,0 +1,24 @@
+.glyphicon {
+    border-radius:50%;
+    border: 2px #ddd solid;
+    padding:20px;
+    font-size:24px;
+    background-color:#fff;
+    color:#999;
+  }
+  
+  .glyphicon:hover {
+    border-radius:50%;
+    color:#fff;
+    background-color:#ddd;
+  }
+  
+  .line {
+    max-width:55%;
+    min-height:2px;
+    background-color: #ddd;
+    margin-top:70px;
+    margin-bottom:-35px;
+    margin-left:auto;
+    margin-right:auto;
+  }

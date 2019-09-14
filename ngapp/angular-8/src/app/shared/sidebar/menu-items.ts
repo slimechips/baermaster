@@ -2,7 +2,7 @@ import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
   {
-    path: '/profile',
+    path: '/rm/profile',
     title: 'Profile Page',
     icon: 'mdi mdi-file',
     class: '',
@@ -10,7 +10,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
-    path: '/customers',
+    path: '/rm/customers',
     title: 'Customers',
     icon: 'mdi mdi-account-multiple',
     class: '',
@@ -18,7 +18,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
-    path: '/full-calendar',
+    path: '/rm/full-calendar',
     title: 'Calendar',
     icon: 'mdi mdi-calendar-clock',
     class: '',
@@ -26,7 +26,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
-    path: '/stocks',
+    path: '/rm/stocks',
     title: 'Stocks',
     icon: 'mdi mdi-chart-bar',
     class: '',
@@ -34,7 +34,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
-    path: '/suggestedreading',
+    path: '/rm/suggestedreading',
     title: 'Suggested Reading',
     icon: 'mdi mdi-arrange-bring-to-front',
     class: '',
@@ -130,4 +130,20 @@ export const ROUTES: RouteInfo[] = [
     extralink: false,
     submenu: []
   },
+  {
+    path: '/component/accordion',
+    title: 'Accordion',
+    icon: 'mdi mdi-arrange-bring-forward',
+    class: '',
+    extralink: false,
+    submenu: []
+  },
+  {
+    path: '/component/alert',
+    title: 'Alert',
+    icon: 'mdi mdi-arrange-bring-forward',
+    class: '',
+    extralink: false,
+    submenu: []
+  }
 ];
