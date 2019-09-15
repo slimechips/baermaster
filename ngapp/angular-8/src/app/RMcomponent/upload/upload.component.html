@@ -1,0 +1,79 @@
+<div class="card">
+    <div class="card-body">
+        <mat-horizontal-stepper>
+            <mat-step label="Request documents">
+                <div class="row">
+                    <div class="col">
+                        <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle (change)="dropDownitem($event)">
+                            Choose Document</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button ngbDropdownItem (click)="counter()">Credit Statement</button>
+                            <button ngbDropdownItem (click)="counter()">Tax Statement</button>
+                            <button ngbDropdownItem (click)="counter()">Bank Account Statement</button>
+                        </div>
+                        </div>
+                        <br/><br/>
+                        <div *ngIf = "count>=1">Credit Statement</div>
+                        <div *ngIf = "count>=2">Tax Statement</div>
+                        <div *ngIf = "count>=3">Bank Account Statement</div>
+                    </div>
+                </div>
+                <br/><br/>
+                <ul class="list-group">
+                    <li *ngFor="let file of fileList" class="list-group-item list-group-item-info">
+                        <i class="mdi mdi-file text-right"></i>&emsp;{{file}}</li>
+                </ul>
+                <br/>
+                <div class="text-right">
+                    <button (click)="waiting()" class="btn btn-secondary w-25" mat-button matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step label="Waiting">
+                <div class="text-center">Waiting for Client to upload the documents</div>
+                <div class="text-right">
+                    <button *ngIf="waited" (click)="loading()" class="btn btn-secondary w-25" mat-button matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step label="Processing Data">
+                <div class="text-center" *ngFor="let data of log">{{data}}</div>
+                <br/>
+                <div *ngIf="loaded" class="text-right">
+                    <button class="btn btn-secondary w-25" mat-button matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step label="Result">
+            <div class="row">
+                <div class="col-6">
+                    <div *ngFor="let k of key; let i = index" class="text-left profile-status"  [ngClass]="{'text-danger': dangerList.includes(i)}">
+                        <div>{{k}}</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div *ngFor="let k of value; let i = index" class="text-left profile-status" [ngClass]="{'text-danger': dangerList.includes(i)}">
+                        <div>{{k}}</div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="text-center"><h3>Assets</h3></div>
+                    <div class="row justify-content-center">
+                        <img src="..\..\..\assets\images\plt.png"/>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="text-center"><h3>Credits</h3></div>
+                    <div class="row justify-content-center">
+                        <img src="..\..\..\assets\images\overdue_accounts.png"/>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center profile-status">
+                <h1>Risk: <span  class="text-warning">Moderate Risk</span> </h1>
+            </div>
+            </mat-step>
+          </mat-horizontal-stepper>
+    </div>
+</div>

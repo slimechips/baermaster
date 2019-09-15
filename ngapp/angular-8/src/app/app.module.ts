@@ -42,6 +42,11 @@ import { ClientSidebarComponent } from './shared/client-sidebar/client-sidebar.c
 import { EditProfileComponent } from './Clientcomponent/edit-profile/edit-profile.component';
 import { UploadComponent } from './Clientcomponent/upload/upload.component';
 import { TutorialComponent } from './Clientcomponent/tutorial/tutorial.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {HashLocationStrategy} from '@angular/common';
+import { RequestUploadComponent } from './RMcomponent/upload/upload.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -70,7 +75,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ClientSidebarComponent,
     EditProfileComponent,
     UploadComponent,
-    TutorialComponent
+    TutorialComponent,
+    RequestUploadComponent
   ],
   imports: [
     CommonModule,
@@ -81,13 +87,16 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     PerfectScrollbarModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(Approutes, { useHash: false }),
+    RouterModule.forRoot(Approutes, { useHash: true }),
     FullCalendarModule,
+    MatFormFieldModule,
+    MatStepperModule,
+    MatInputModule
   ],
   providers: [
     {
       provide: LocationStrategy,
-      useClass: PathLocationStrategy
+      useClass: HashLocationStrategy
     },
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

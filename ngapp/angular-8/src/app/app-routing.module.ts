@@ -16,6 +16,7 @@ import { ClientProfileComponent } from './Clientcomponent/profile/profile.compon
 import { ClientComponent } from './layouts/client/client.component';
 import { UploadComponent } from './Clientcomponent/upload/upload.component';
 import { TutorialComponent } from './Clientcomponent/tutorial/tutorial.component';
+import { RequestUploadComponent } from './RMcomponent/upload/upload.component';
 
 export const Approutes: Routes = [
   {
@@ -39,6 +40,13 @@ export const Approutes: Routes = [
           title: 'Profile',
         }
       },
+      {
+        path: 'upload',
+        component: RequestUploadComponent,
+        data: {
+            title: 'Onboarding',
+          }
+    },
       {
         path: 'stocks',
         component: StocksComponent,

@@ -40,4 +40,8 @@ export class CustomersComponent implements OnInit {
       CustomerProfileComponent.curCustomer = id;
       this._router.navigate(['/rm/customer-profile']);
   }
+
+  upload(){
+    this._router.navigate(['/rm/upload']);
+  }
 }

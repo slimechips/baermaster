@@ -80,4 +80,8 @@ export class ClientComponent implements OnInit {
       }
     }
 
+    logOut(){
+        this.router.navigate(['client/login'])
+    }
+
 }

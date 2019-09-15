@@ -61,4 +61,8 @@ export class FullComponent implements OnInit {
       default:
     }
   }
+
+  logOut(){
+      this.router.navigate(['rm/login'])
+  }
 }

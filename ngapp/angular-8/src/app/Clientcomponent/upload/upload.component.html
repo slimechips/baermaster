@@ -1,30 +1,25 @@
-<div class="row">
-    <div class="card col-12">
-        <div class="card-body">
-            <div class="line hidden-xs"></div>
-            <div class="col-3">
-                Upload document
-            </div>
-            <div class="col-3">
-                Data Gathering and Processing
-            </div>
-            <div class="col-3">
-                Doing background check
-            </div>
-            <div class="col-3">
-                result
-            </div>
-        </div>
-    </div>
-</div>
-<br />
-<div class="row">
+<div class="card">
     <div class="card-body">
-        <div class="card">
-            
-        </div>
-
-        </div>
+        <mat-horizontal-stepper>
+            <mat-step label="Upload documents">
+                <div>Requested Credit</div>
+                <div>Requested Tax Statement</div>
+                <div>Requested Bank Account Statement</div>
+                <br/>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" (change)="onFileSelected($event)" lang="es">
+                    <label class="custom-file-label" for="customFileLang">Upload file</label>
+                </div>
+                <br/><br/>
+                <ul class="list-group">
+                    <li *ngFor="let file of fileList" class="list-group-item list-group-item-info">
+                        <i class="mdi mdi-file text-right"></i>&emsp;{{file}}</li>
+                </ul>
+                <br/>
+                <div class="text-right">
+                    <button (click)="loading()" class="btn btn-secondary w-25">Submit</button>
+                </div>
+            </mat-step>
+          </mat-horizontal-stepper>
     </div>
 </div>
-

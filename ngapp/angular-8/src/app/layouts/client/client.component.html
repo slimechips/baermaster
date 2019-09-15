@@ -1,6 +1,7 @@
 <!-- ============================================================== -->
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
+
 <div id="main-wrapper" [ngClass]="{'show-sidebar': showMobileMenu}" dir="ltr" data-theme="light" data-layout="vertical"
     [attr.data-sidebartype]="sidebartype" data-sidebar-position="absolute" data-header-position="fixed"
     data-boxed-layout="full">
@@ -88,7 +89,10 @@
 		          <!-- text-->
 		        </div>
 		      </div>
-		    </div>
+            </div>
+            <div class="row justify-content-center">
+                <button (click)="logOut()" class='btn btn-primary'>Log out</button>
+            </div>
             <app-client-sidebar></app-client-sidebar>
         </div>
     </aside>
