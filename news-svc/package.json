@@ -28,7 +28,7 @@
     "express": "4.17.1",
     "f10-util": "file:../f10-util",
     "node-cache": "4.2.1",
-    "shelljs": "0.8.3"
+    "shelljs": "0.8.5"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "2.1.0",
