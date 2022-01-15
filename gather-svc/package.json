@@ -28,7 +28,7 @@
     "express": "4.17.1",
     "f10-util": "file:../f10-util",
     "node-cache": "4.2.1",
-    "shelljs": "0.8.3",
+    "shelljs": "0.8.5",
     "xml2js": "0.4.22"
   },
   "devDependencies": {
